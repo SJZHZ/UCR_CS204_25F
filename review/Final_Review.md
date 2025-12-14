@@ -1,4 +1,4 @@
-# UCR CS204 Final Review
+# UCR CS204 25 Fall Final Review
 1. Wireless Overview
 	1. Link Layer Core Mission
 		- Session management
