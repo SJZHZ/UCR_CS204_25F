@@ -1,0 +1,150 @@
+# UCR CS204 Midterm Review
+1. Overview
+	- Layering (Protocols)
+		- Application
+		- Transport: E2E data transfer
+		- Network: routing
+		- Link: transfer between neighboring nodes, including access
+		- Physical: bits over physical medium
+	- Physical and Link layers usually appear in tandem, since each PHY technology has certain properties.
+	- PHY
+		- Guided Media: solid
+		- Unguided Media: wireless
+			- electromagnetic radiation: $f=\frac{c}{\lambda}$
+			- Issues
+				- Wireless
+					- Interference: same frequency band
+					- Multipath Fading: scattering, reflection, diffraction
+				- Mobility: dynamic, roaming
+		- Modulation (concrete) & Demodulation (discrete)
+		- AM (amplitude) & FM (frequency): phase shift + amplitude combinations
+	- Link Layer
+		- Framing
+		- Multiple Access
+			- Channel partitioning
+				- TDMA
+				- FDMA
+			- Random access
+				- CSMA/CD: send & listen concurrently (Ethernet)
+				- CSMA/CA: RTS(request) & CTS(clear)
+				- Hidden Terminal Problem
+			- Taking turns
+		- Error detection & correction
+	- Network Layer
+		- IP address: 32-bit identifier
+		- Interface
+		- NAT: one IP, multiple port
+		- IPv6: 128 bit address
+		- AS (Autonomous System)
+			- Inter-AS routing: BGP (system policy)
+			- Intra-AS routing 
+				- RIP: distance vector (shortest path by hop)
+				- OSPF: link-state (shortest path by bandwidth)
+			- Scale: hierarchical routing saves table size & reduces update traffic
+	- Transport Layer
+		- Packet switching: divide, header, ...
+			- Why? Traffic is bursty & helps multiplexing
+		- Best-effort delivery: lost, corrupted, OoO
+			- Why? Interoperability & Evolution
+			- Let host handle all
+			- Optionally do ED/EC, CC/FC, ordering, ...
+	- Application Layer: socket & port
+2. Application
+	- Web
+		- HTTP/0.9: single request, single response; hypertext
+		- HTTP/1.0: multi-line requests; status code; not limited to plain-text
+		- HTTP/1.1: persistent connection (latency sensitive)
+		- HTTP/2.1: pipelining or multiple connections are not helpful
+			- SPDY inlining: binary encoded (not human readable) & stream multiplexed & stream prioritized (by offset) & fast recovery
+			- No parallel: due to shake hand overhead and increases latency
+			- No pipeline: due to header congestion 
+		- CDN: content provider updates the best address to the DNS server
+	- Video
+		- Data plane (Codecs): compress & decompress, error detection & concealment
+			- Encoding: intra-frame lossy/lossless compression, inter-frame difference
+			- Decoding: spatial, temporal, motion-compensated, blur or blackout
+		- Control plane(Streaming protocols): connection, segment, quality
+			- Video on Demand (VoD)
+				- Adaptive Bit Rate (ABR) based on buffer/bandwidth
+			- Real-time streaming or communication (RTC)
+				- WebRTC is not a single protocol
+					- User don't have detailed control
+					- Feedback: ACK rate, delay, loss rate
+	- P2P
+		- Assumption
+			- No always-on server
+			- Directly communicate
+			- IP dynamic
+		- Model
+			- Centralized Server: $T \geq \max({\frac{NF}{u_s}, \frac{F}{d_{min}}})$
+			- Distributed P2P: $T = O(\log n)$
+		- Lookup(key)
+			- Design goals: scalability, simplicity, robustness, plausible deniability
+			- Main approaches
+				- Central directory
+				- Flooding query
+				- Hierarchical Overlay
+				- Distributed Hash Table
+					- Chord: $O(\log n)$ short cuts, within at most $O(\log n)$ hops
+			- Detail
+				- rarest chunk first
+				- rewarding and optimistic unchoking
+3. Transport
+	- MPTCP
+		- Might be ignored while crossing the middleboxes, especially in NAT
+		- Token with identification and authentication
+		- Sequence number: cut data into chunks for subflows, and use flow-level ALONG WITH subflow-level, so that receiver can place them in application order and each subflow can better control its acknowledgement and retransmission
+		- Encode sequence number and ACKs in TCP options, in order to avoid flow control dropping data and unable to send ACK.
+		- Bandwidth design principles
+			- Use efficient path: always place the major traffic on the least congested path to avoid a negative-sum game
+			- Coupled CC among subflows:  estimated bandwidth $B=\frac{cwnd}{RTT}$
+				- At least as good as TCP: MPTCP should provide at least at much throughput as the best single-path TCP $$\sum_{P}B_{MPTCP, i} \geq \max_P{B_{TCP}}$$
+				- Ensure no harm to TCP: MPTCP should take no more capacity on any non-bottleneck collection of path than the best single-path TCP on that collection?(There may be some problem)$$\sum_{s}{B_{MPTCP, i}} \leq \max_{S} B_{TCP} \text{  for some } S\in P$$
+			- The only thing in the format we can control is congestion window $cwnd$, so MPTCP fairness is all about deciding the incremental value of $cwnd$ in AIMD.
+	- Conventional CC
+		- Assumption: loss only caused by congestion
+		- Tahoe: slow start, congestion avoidance, loss
+		- Reno: timeout -> normal slow start; triple duplicate ACK: fast retransmission
+		- BIC: binary search probe, unfair since shorter RTT are much more aggressive
+		- CUBIC: using cubic function of actual time, TCP friendly & RTT fair
+		- delay-based 
+	- BBR: model based CC
+		- $BDP =  maxBW \times minRTT$, network capability limited by the bottleneck
+		- measuring BW need subtle design
+			- feedback does not come immediately
+			- ACK aggregation
+		- especially helpful for wireless network
+	- QUIC
+		- an application-layer level protocol, based on UDP
+		- applications know more about the transmission feature, so move the TCP things to app-layer, that we can further reduce overhead
+		- error & congestion control, connection establishment, multiplexed streaming
+	- SDN
+		- Layers abstraction
+		- Data plane & Control plane
+			- Data plane
+				- receive & forward
+				- network stack protocols have designed abstractions
+			- Control plane
+				- update flow table
+				- no abstractions for control plane before SDN
+		- Programmable interfaces
+			- Distributed State Abstraction: use APIs for data structure like graphs, rather than for a distributed protocol
+				- use centralized control function
+			- Specification Abstraction: use general programming model
+				- map abstract configuration to physical configuration
+			- Forwarding Abstraction: flexible forwarding model & hide details of hardware
+				- CPU (for centralized control) + ASIC (run OpenFlow)
+		- Use cases
+			- OSPF & Dijkstra
+			- Load Balancing
+	- ICN
+		- Network is all about retrieving data, but not necessarily ask host
+		- Host-centric: DNS & TCP/IP
+		- Information-centric
+			- Named Data Networking
+				- consumer ask for content
+				- node not having the information can forward 
+				- node having the information (producer) can reply
+			- other benefits: built-in security, edge computation without Internet
+	- SDN & ICN are for smaller scale networks, not breaking the current Internet's design philosophies
+
