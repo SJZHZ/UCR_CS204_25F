@@ -1,0 +1,225 @@
+Run #1
+Packet length(32 bits): 20
+
+-----Linear unit test-----
+Do nothing.
+Functional: correct! 190 190
+Linear: 7.246376 GB/s
+Linear SIMD: 14.492753 GB/s
+
+-----CRC unit test-----
+CRC combine: CRC_0 = DD4B526F, Delta_CRC = 71DCE719 => CRC_F = AC97B576, CRC_0 XOR Delta_CRC = AC97B576
+CRC Naive reverse:    53684A89
+Functional: incorrect! 53684A89 53684A89 53684A89 53684A89 DA9E3B10
+CRC performance test: 
+  Naive: 0.088020 GB/s
+  Table: 0.410678 GB/s
+  Parallel8: 1.295337 GB/s
+  Parallel16: 1.358696 GB/s
+  CL: 1.058201 GB/s
+HD[2]: 0
+HD[3]: 0
+HD[4]: 0
+
+-----BigMod unit test-----
+BigMod Moduli: 257884327 257884327
+BigMod Magic Number(LOOP): 9223372037072353313 9223372037072353313
+BigMod Magic Number(FINAL): 4611686018665118820 4611686018665118820
+BigMod functional test: correct. 17668416 17668416 17668416 17668416 17668416
+
+SIMD multiplication test: 
+  Result: 70 70, correct.
+BigMod performance test: 
+  Bitwise: 0.163425 GB/s
+  Naive: 1.191895 GB/s
+  Table: 4.651163 GB/s
+  Table_Iterative: 4.587156 GB/s
+  Table_SIMD: 4.587156 GB/s
+-----BigMod HD Search-----
+HD[2]: 0
+HD[3]: 0
+HD[4]: 166
+
+-----Finished!-----
+Total running time: 27 s
+
+Run #2
+Packet length(32 bits): 40
+
+-----Linear unit test-----
+Do nothing.
+Functional: correct! 780 780
+Linear: 4.484305 GB/s
+Linear SIMD: 21.739129 GB/s
+
+-----CRC unit test-----
+CRC combine: CRC_0 = AEA9FF2A, Delta_CRC = 55F8AC9C => CRC_F = FB5153B6, CRC_0 XOR Delta_CRC = FB5153B6
+CRC Naive reverse:    4AEAC49
+Functional: incorrect! 4AEAC49 4AEAC49 4AEAC49 4AEAC49 9CF6D76A
+CRC performance test: 
+  Naive: 0.088106 GB/s
+  Table: 0.387747 GB/s
+  Parallel8: 1.788909 GB/s
+  Parallel16: 1.261034 GB/s
+  CL: 1.212121 GB/s
+HD[2]: 0
+HD[3]: 0
+HD[4]: 0
+
+-----BigMod unit test-----
+BigMod Moduli: 257884327 257884327
+BigMod Magic Number(LOOP): 9223372037072353313 9223372037072353313
+BigMod Magic Number(FINAL): 4611686018665118820 4611686018665118820
+BigMod functional test: correct. 42269893 42269893 42269893 42269893 42269893
+
+SIMD multiplication test: 
+  Result: 70 70, correct.
+BigMod performance test: 
+  Bitwise: 0.167813 GB/s
+  Naive: 1.055966 GB/s
+  Table: 5.181347 GB/s
+  Table_Iterative: 5.291005 GB/s
+  Table_SIMD: 5.319149 GB/s
+-----BigMod HD Search-----
+HD[2]: 0
+HD[3]: 0
+HD[4]: 7354
+
+-----Finished!-----
+Total running time: 47 s
+
+Run #3
+Packet length(32 bits): 60
+
+-----Linear unit test-----
+Do nothing.
+Functional: correct! 1770 1770
+Linear: 8.130081 GB/s
+Linear SIMD: 24.390242 GB/s
+
+-----CRC unit test-----
+CRC combine: CRC_0 = 65147DA7, Delta_CRC = 439EDBEC => CRC_F = 268AA64B, CRC_0 XOR Delta_CRC = 268AA64B
+CRC Naive reverse:    D97559B4
+Functional: incorrect! D97559B4 D97559B4 D97559B4 D97559B4 1F35FE18
+CRC performance test: 
+  Naive: 0.083229 GB/s
+  Table: 0.358038 GB/s
+  Parallel8: 1.412429 GB/s
+  Parallel16: 1.190476 GB/s
+  CL: 1.207729 GB/s
+HD[2]: 0
+HD[3]: 0
+HD[4]: 0
+
+-----BigMod unit test-----
+BigMod Moduli: 257884327 257884327
+BigMod Magic Number(LOOP): 9223372037072353313 9223372037072353313
+BigMod Magic Number(FINAL): 4611686018665118820 4611686018665118820
+BigMod functional test: correct. 61813259 61813259 61813259 61813259 61813259
+
+SIMD multiplication test: 
+  Result: 70 70, correct.
+BigMod performance test: 
+  Bitwise: 0.160205 GB/s
+  Naive: 0.975610 GB/s
+  Table: 4.950495 GB/s
+  Table_Iterative: 5.154639 GB/s
+  Table_SIMD: 6.097561 GB/s
+-----BigMod HD Search-----
+HD[2]: 0
+HD[3]: 0
+HD[4]: 38684
+
+-----Finished!-----
+Total running time: 106 s
+
+Run #4
+Packet length(32 bits): 80
+
+-----Linear unit test-----
+Do nothing.
+Functional: correct! 3160 3160
+Linear: 6.451613 GB/s
+Linear SIMD: 23.809522 GB/s
+
+-----CRC unit test-----
+CRC combine: CRC_0 = E825E34B, Delta_CRC = 5238A8B2 => CRC_F = BA1D4BF9, CRC_0 XOR Delta_CRC = BA1D4BF9
+CRC Naive reverse:    45E2B406
+Functional: incorrect! 45E2B406 45E2B406 45E2B406 45E2B406 6C89A68
+CRC performance test: 
+  Naive: 0.084832 GB/s
+  Table: 0.356506 GB/s
+  Parallel8: 1.597444 GB/s
+  Parallel16: 2.832861 GB/s
+  CL: 1.243781 GB/s
+HD[2]: 0
+HD[3]: 0
+HD[4]: 0
+
+-----BigMod unit test-----
+BigMod Moduli: 257884327 257884327
+BigMod Magic Number(LOOP): 9223372037072353313 9223372037072353313
+BigMod Magic Number(FINAL): 4611686018665118820 4611686018665118820
+BigMod functional test: correct. 64950675 64950675 64950675 64950675 64950675
+
+SIMD multiplication test: 
+  Result: 70 70, correct.
+BigMod performance test: 
+  Bitwise: 0.161134 GB/s
+  Naive: 0.950570 GB/s
+  Table: 5.076142 GB/s
+  Table_Iterative: 4.651163 GB/s
+  Table_SIMD: 5.154639 GB/s
+-----BigMod HD Search-----
+HD[2]: 0
+HD[3]: 0
+HD[4]: 122648
+
+-----Finished!-----
+Total running time: 213 s
+
+Run #5
+Packet length(32 bits): 100
+
+-----Linear unit test-----
+Do nothing.
+Functional: correct! 4950 4950
+Linear: 6.756755 GB/s
+Linear SIMD: 24.390239 GB/s
+
+-----CRC unit test-----
+CRC combine: CRC_0 = AA685670, Delta_CRC = B9DDF2F3 => CRC_F = 13B5A483, CRC_0 XOR Delta_CRC = 13B5A483
+CRC Naive reverse:    EC4A5B7C
+Functional: incorrect! EC4A5B7C EC4A5B7C EC4A5B7C EC4A5B7C A605BBA5
+CRC performance test: 
+  Naive: 0.087032 GB/s
+  Table: 0.376081 GB/s
+  Parallel8: 1.472754 GB/s
+  Parallel16: 2.398081 GB/s
+  CL: 1.340482 GB/s
+HD[2]: 0
+HD[3]: 0
+HD[4]: 194
+
+-----BigMod unit test-----
+BigMod Moduli: 257884327 257884327
+BigMod Magic Number(LOOP): 9223372037072353313 9223372037072353313
+BigMod Magic Number(FINAL): 4611686018665118820 4611686018665118820
+BigMod functional test: correct. 153775282 153775282 153775282 153775282 153775282
+
+SIMD multiplication test: 
+  Result: 70 70, correct.
+BigMod performance test: 
+  Bitwise: 0.171497 GB/s
+  Naive: 1.001001 GB/s
+  Table: 5.464480 GB/s
+  Table_Iterative: 5.319148 GB/s
+  Table_SIMD: 6.622515 GB/s
+-----BigMod HD Search-----
+HD[2]: 0
+HD[3]: 0
+HD[4]: 285886
+
+-----Finished!-----
+Total running time: 394 s
+

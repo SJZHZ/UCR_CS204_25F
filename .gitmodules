@@ -1,0 +1,6 @@
+[submodule "third_party/crc-clmul-sim"]
+	path = third_party/crc-clmul-sim
+	url = https://github.com/ilyakurdyukov/crc-clmul-sim.git
+[submodule "third_party/crc"]
+	path = third_party/crc
+	url = https://github.com/rawrunprotected/crc.git
